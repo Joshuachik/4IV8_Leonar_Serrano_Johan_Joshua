@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* FONDO CON IMAGEN + OVERLAY */
+body {
+    background: 
+        linear-gradient(rgba(11,29,38,0.8), rgba(11,29,38,0.9)),
+        url("../img/fondo.jpg") no-repeat center/cover;
+
+    font-family: 'Inter', sans-serif;
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    color: #e6edf3;
+}
+
+/* CONTENEDOR */
+.container {
+    background: rgba(31, 47, 58, 0.9); /* azul oscuro */
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+}
+
+/* TITULO */
+h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 28px;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+/* BOTONES */
+button {
+    display: block;
+    width: 220px;
+    padding: 12px;
+    margin: 10px auto;
+    border: none;
+    border-radius: 6px;
+
+    background: #D72638; /* rojo principal */
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* HOVER */
+button:hover {
+    background: #ff3b4d;
+    transform: scale(1.05);
+}
+
+/* EFECTO AL HACER CLICK */
+button:active {
+    transform: scale(0.97);
+}
+
+/* DETALLE EXTRA (OPCIONAL) */
+button::after {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 0;
+    background: white;
+    transition: 0.3s;
+}
+
+button:hover::after {
+    width: 100%;
+}
