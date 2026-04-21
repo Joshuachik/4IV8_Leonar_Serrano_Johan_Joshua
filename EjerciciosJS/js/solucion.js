@@ -6,12 +6,42 @@ document.getElementById("btn4").addEventListener("click", calificacion);
 document.getElementById("btn5").addEventListener("click", porcentajes);
 document.getElementById("btn6").addEventListener("click", edad);
 
+// REGEX
+const numeroRegex = /^\d+(\.\d+)?$/;
+const enteroRegex = /^\d+$/;
+
+// FUNCIÓN GENERAL PARA PEDIR DATOS (🔥 clave)
+function pedirNumero(mensaje, { min = -Infinity, max = Infinity, entero = false } = {}) {
+    let valor = prompt(mensaje)?.trim();
+
+    if (!valor) {
+        alert("No puedes dejar el campo vacío");
+        return null;
+    }
+
+    let esValido = entero ? enteroRegex.test(valor) : numeroRegex.test(valor);
+
+    if (!esValido) {
+        alert("Formato inválido");
+        return null;
+    }
+
+    let num = Number(valor);
+
+    if (num < min || num > max) {
+        alert(`El valor debe estar entre ${min} y ${max}`);
+        return null;
+    }
+
+    return num;
+}
+
 // FUNCIONES
 
 function inversion() {
-    let dinero = Number(prompt("¿Cuánto deseas invertir?"));
+    let dinero = pedirNumero("¿Cuánto deseas invertir?", { min: 0.01 });
 
-    if (!dinero || dinero <= 0) return alert("Valor incorrecto");
+    if (dinero === null) return;
 
     let resultado = dinero * 1.02;
 
@@ -19,15 +49,16 @@ function inversion() {
 }
 
 function comisiones() {
-    let base = Number(prompt("Sueldo base"));
+    let base = pedirNumero("Sueldo base", { min: 0 });
+
+    if (base === null) return;
+
     let ventas = [];
 
     for (let i = 1; i <= 3; i++) {
-        ventas.push(Number(prompt("Venta " + i)));
-    }
-
-    if ([base, ...ventas].some(x => isNaN(x))) {
-        return alert("Error en datos");
+        let venta = pedirNumero(`Venta ${i}`, { min: 0 });
+        if (venta === null) return;
+        ventas.push(venta);
     }
 
     let suma = ventas.reduce((a, b) => a + b, 0);
@@ -38,9 +69,9 @@ Total: $${(base + extra).toFixed(2)}`);
 }
 
 function descuento() {
-    let compra = Number(prompt("Total de compra"));
+    let compra = pedirNumero("Total de compra", { min: 0.01 });
 
-    if (!compra) return alert("Dato inválido");
+    if (compra === null) return;
 
     let pagar = compra * 0.85;
 
@@ -48,43 +79,52 @@ function descuento() {
 }
 
 function calificacion() {
-    let notas = [
-        Number(prompt("Parcial 1")),
-        Number(prompt("Parcial 2")),
-        Number(prompt("Parcial 3"))
-    ];
+    let notas = [];
 
-    let examen = Number(prompt("Examen final"));
-    let trabajo = Number(prompt("Trabajo final"));
-
-    if ([...notas, examen, trabajo].some(x => isNaN(x))) {
-        return alert("Datos incorrectos");
+    for (let i = 1; i <= 3; i++) {
+        let nota = pedirNumero(`Parcial ${i}`, { min: 0, max: 10 });
+        if (nota === null) return;
+        notas.push(nota);
     }
 
-    let prom = notas.reduce((a, b) => a + b, 0) / 3;
+    let examen = pedirNumero("Examen final", { min: 0, max: 10 });
+    let trabajo = pedirNumero("Trabajo final", { min: 0, max: 10 });
 
+    if (examen === null || trabajo === null) return;
+
+    let prom = notas.reduce((a, b) => a + b, 0) / 3;
     let final = (prom * 0.55) + (examen * 0.30) + (trabajo * 0.15);
 
     alert(`Calificación final: ${final.toFixed(2)}`);
 }
 
 function porcentajes() {
-    let h = Number(prompt("Hombres"));
-    let m = Number(prompt("Mujeres"));
+    let h = pedirNumero("Hombres", { min: 0, entero: true });
+    let m = pedirNumero("Mujeres", { min: 0, entero: true });
+
+    if (h === null || m === null) return;
 
     let total = h + m;
 
-    if (!total) return alert("Error");
+    if (total === 0) {
+        return alert("El total no puede ser 0");
+    }
 
-    alert(`Hombres: ${(h/total*100).toFixed(1)}%
-Mujeres: ${(m/total*100).toFixed(1)}%`);
+    alert(`Hombres: ${(h / total * 100).toFixed(1)}%
+Mujeres: ${(m / total * 100).toFixed(1)}%`);
 }
 
 function edad() {
-    let nacimiento = Number(prompt("Año de nacimiento"));
+    let nacimiento = pedirNumero("Año de nacimiento", { min: 1900, max: new Date().getFullYear(), entero: true });
+
+    if (nacimiento === null) return;
+
     let actual = new Date().getFullYear();
+    let edad = actual - nacimiento;
 
-    if (!nacimiento) return alert("Dato inválido");
+    if (edad > 120) {
+        return alert("Edad no válida (máximo 120 años)");
+    }
 
-    alert(`Tu edad es: ${actual - nacimiento} años`);
+    alert(`Tu edad es: ${edad} años`);
 }
