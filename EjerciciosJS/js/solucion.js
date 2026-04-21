@@ -10,7 +10,7 @@ document.getElementById("btn6").addEventListener("click", edad);
 const numeroRegex = /^\d+(\.\d+)?$/;
 const enteroRegex = /^\d+$/;
 
-// FUNCIÓN GENERAL PARA PEDIR DATOS (🔥 clave)
+
 function pedirNumero(mensaje, { min = -Infinity, max = Infinity, entero = false } = {}) {
     let valor = prompt(mensaje)?.trim();
 
