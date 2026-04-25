@@ -1,0 +1,162 @@
+/* 🔹 IMPORTAR FUENTES */
+@import url('https://fonts.googleapis.com/css2?family=Aboreto&family=Linden+Hill&family=Adamina&display=swap');
+
+/* 🔹 RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 🔹 BODY */
+body {
+    background-color: #142F41; /* azul base */
+    font-family: 'Adamina', serif;
+    color: #fff;
+}
+
+/* 🔹 CONTENEDOR */
+.container {
+    width: 900px;
+    margin: 40px auto;
+}
+
+/* 🔹 TARJETAS */
+.card {
+    background-color: #0B2436;
+    border: 2px solid #021B2B;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+/* 🔹 TITULOS */
+.card h2 {
+    font-family: 'Aboreto', serif;
+    font-size: 28px;
+    color: #D7263D;
+    margin-bottom: 15px;
+}
+
+/* 🔹 TEXTO */
+.card p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #d1d5db;
+}
+
+/* 🔹 INPUT GENERAL */
+input {
+    border: 1px solid #021B2B;
+    border-radius: 8px;
+    padding: 8px;
+    margin-top: 10px;
+    outline: none;
+    background-color: #142F41;
+    color: white;
+}
+
+/* 🔹 INPUT GRANDES */
+#p1-input,
+#p3-input {
+    width: 100%;
+}
+
+/* 🔹 VECTORES */
+.vectores {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+/* columnas */
+.vectores div {
+    width: 45%;
+    text-align: center;
+}
+
+/* inputs pequeños */
+.vectores input {
+    width: 70px;
+    margin: 6px auto;
+    display: block;
+}
+
+/* títulos X Y */
+.vectores h4 {
+    font-family: 'Linden Hill', serif;
+    margin-bottom: 10px;
+}
+
+/* 🔴 BOTÓN (color principal Figma) */
+button {
+    background-color: #D7263D;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    margin-top: 15px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+/* hover */
+button:hover {
+    background-color: #b81f31;
+}
+
+/* 🔹 OUTPUT */
+.output {
+    background-color: #021B2B;
+    border-radius: 10px;
+    padding: 12px;
+    margin-top: 15px;
+    font-size: 13px;
+    color: #9ca3af;
+}
+
+/* 🔹 RESPONSIVE */
+@media (max-width: 900px) {
+    .container {
+        width: 90%;
+    }
+
+    .vectores {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .vectores div {
+        width: 100%;
+    }
+}
+
+/* 🔹 CONTENEDOR DE BOTONES */
+.card button {
+    margin-right: 10px;
+}
+
+/* 🔹 BOTÓN RESET (ligeramente diferente) */
+button[onclick^="reset"] {
+    background-color: #021B2B;
+    border: 1px solid #D7263D;
+}
+
+/* hover reset */
+button[onclick^="reset"]:hover {
+    background-color: #0B2436;
+}
+h2 img {
+    width: 20px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* ICONOS EN BOTONES */
+button img {
+    width: 16px;
+    margin-right: 8px;
+    vertical-align: middle;
+}

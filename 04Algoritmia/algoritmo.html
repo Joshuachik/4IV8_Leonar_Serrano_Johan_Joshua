@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Algoritmia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/estilos.css">
+
+    <!-- Fuente -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- PROBLEMA 1 -->
+        <div class="card">
+            <h2>
+                <img src="iconos/raven 1.svg"> Problema 1
+            </h2>
+
+            <p>
+                Dada una lista de palabras separadas por un espacio, invierte el orden de dichas palabras.
+                Las palabras pueden estar separadas únicamente por espacios.
+            </p>
+
+            <input type="text" id="p1-input" placeholder="Ingrese palabras separadas por espacio">
+
+            <button onclick="problema1()">
+                <img src="iconos/shield 1.svg"> Invertir palabras
+            </button>
+
+            <button onclick="resetP1()">
+                <img src="iconos/shield 1.svg"> Resetear
+            </button>
+
+            <div class="output" id="p1-output">Esperando datos...</div>
+        </div>
+
+        <!-- PROBLEMA 2 -->
+        <div class="card">
+            <h2>
+                <img src="iconos/thor-hammer 1.svg"> Problema 2
+            </h2>
+
+            <p>
+                Dados dos vectores v1=(x1,x2,x3,x4,x5) y v2=(y1,y2,y3,y4,y5),
+                y teniendo permitido permutar el orden de los elementos,
+                encontrar el mínimo producto escalar entre ambos vectores.
+                <br><br>
+                El producto escalar se calcula como:
+                x1*y1 + x2*y2 + x3*y3 + x4*y4 + x5*y5
+            </p>
+
+            <div class="vectores">
+                <div>
+                    <h4>X</h4>
+                    <input type="number" id="p2-x1">
+                    <input type="number" id="p2-x2">
+                    <input type="number" id="p2-x3">
+                    <input type="number" id="p2-x4">
+                    <input type="number" id="p2-x5">
+                </div>
+
+                <div>
+                    <h4>Y</h4>
+                    <input type="number" id="p2-y1">
+                    <input type="number" id="p2-y2">
+                    <input type="number" id="p2-y3">
+                    <input type="number" id="p2-y4">
+                    <input type="number" id="p2-y5">
+                </div>
+            </div>
+
+            <button onclick="problema2()">
+                <img src="iconos/thor-hammer 1.svg"> Calcular vector
+            </button>
+
+            <button onclick="resetP2()">
+                <img src="iconos/thor-hammer 1.svg"> Resetear
+            </button>
+
+            <div class="output" id="p2-output">Esperando datos...</div>
+        </div>
+
+        <!-- PROBLEMA 3 -->
+        <div class="card">
+            <h2>
+                <img src="iconos/raven 1.svg"> Problema 3
+            </h2>
+
+            <p>
+                Dada una lista de palabras, encontrar la palabra que más número de caracteres únicos tenga.
+                <br><br>
+                Ejemplo:
+                CASA = 3 (c,a,s) | PERRO = 4 (p,e,r,o)
+                <br><br>
+                Considera solamente el alfabeto A-Z en mayúsculas.
+                Las palabras deben estar separadas por coma.
+            </p>
+
+            <input type="text" id="p3-input" placeholder="Ej: casa, perro, algoritmo">
+
+            <button onclick="problema3()">
+                <img src="iconos/shield 1.svg"> Calcular palabras
+            </button>
+
+            <button onclick="resetP3()">
+                <img src="iconos/shield 1.svg"> Resetear
+            </button>
+
+            <div class="output" id="p3-output">Esperando datos...</div>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="js/algoritmia.js"></script>
+
+</body>
+</html>
