@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Vikingo</title>
+
+    <!-- Fuente -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/estilos.css">
+</head>
+<body>
+
+    <div class="form-container">
+
+        <h1>Informacion sobre formulario </h1>
+        
+        <p>Todos los formularios que están en internet tienen métodos de programación por defecto. Estos métodos nos sirven para poder hacer las acciones principales como son: Acciones para poderse conectar con los servicios, a través de la Arquitectura Cliente Servidor. Todos los formularios utilizan el método GET por defecto, y el segundo método principal es POST.</p>
+
+        <form id="formulario" onsubmit="return validar(this)">
+
+            <label>Nombre</label>
+            <input type="text" name="nombre">
+
+            <label>Edad</label>
+            <input type="number" name="edad">
+
+            <label>Email</label>
+            <input type="email" name="email">
+
+            <input type="submit" value="Enviar Registro">
+            <input type="reset" value="Borrar datos">
+
+        </form>
+
+    </div>
+
+    <script src="./js/validarformulario.js"></script>
+</body>
+</html>

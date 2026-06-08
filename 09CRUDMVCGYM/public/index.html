@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Tracker - Panel de Control</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Gym Tracker </h1>
+        <p>Gestión de Entrenamiento y Rendimiento Histórico</p>
+    </header>
+
+    <nav class="tabs-nav">
+        <button class="tab-btn active" onclick="switchTab('atletas')">Atletas</button>
+        <button class="tab-btn" onclick="switchTab('ejercicios')">Ejercicios</button>
+        <button class="tab-btn" onclick="switchTab('rutinas')">Rutinas</button>
+        <button class="tab-btn" onclick="switchTab('historial')">Historial de Marcas</button>
+    </nav>
+
+    <main id="section-atletas" class="tab-content active">
+        <div class="panel">
+            <h2 id="form-title-atleta">Registrar Atleta</h2>
+            <form id="form-atleta">
+                <input type="hidden" id="atleta-id">
+                <div class="form-group">
+                    <label for="atleta-nombre">Nombre Completo</label>
+                    <input type="text" id="atleta-nombre" class="form-control" required placeholder="Ej: Johan Joshua">
+                </div>
+                <div class="form-group">
+                    <label for="atleta-edad">Edad</label>
+                    <input type="number" id="atleta-edad" class="form-control" required placeholder="Ej: 17">
+                </div>
+                <div class="form-group">
+                    <label for="atleta-email">Correo Electrónico</label>
+                    <input type="email" id="atleta-email" class="form-control" required placeholder="Ej: johan@gmail.com">
+                </div>
+                <button type="submit" class="btn btn-primary" id="btn-submit-atleta">Guardar Atleta</button>
+                <button type="button" class="btn btn-cancel" id="btn-cancel-atleta" onclick="resetFormAtleta()">Cancelar Edición</button>
+            </form>
+        </div>
+        <div class="panel">
+            <h2>Listado de Atletas</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Edad</th>
+                            <th>Email</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-atletas-body">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <main id="section-ejercicios" class="tab-content">
+        <div class="panel">
+            <h2 id="form-title-ejercicio">Agregar Ejercicio</h2>
+            <form id="form-ejercicio">
+                <input type="hidden" id="ejercicio-id">
+                <div class="form-group">
+                    <label for="ejercicio-nombre">Nombre del Ejercicio</label>
+                    <input type="text" id="ejercicio-nombre" class="form-control" required placeholder="Ej: Press de Banca">
+                </div>
+                <div class="form-group">
+                    <label for="ejercicio-musculo">Músculo Principal</label>
+                    <input type="text" id="ejercicio-musculo" class="form-control" required placeholder="Ej: Pecho, Piernas">
+                </div>
+                <button type="submit" class="btn btn-primary" id="btn-submit-ejercicio">Guardar Ejercicio</button>
+                <button type="button" class="btn btn-cancel" id="btn-cancel-ejercicio" onclick="resetFormEjercicio()">Cancelar Edición</button>
+            </form>
+        </div>
+        <div class="panel">
+            <h2>Catálogo de Ejercicios</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ejercicio</th>
+                            <th>Músculo Principal</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-ejercicios-body">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <main id="section-rutinas" class="tab-content">
+        <div class="panel">
+            <h2 id="form-title-rutina">Crear Estructura Rutina</h2>
+            <form id="form-rutina">
+                <input type="hidden" id="rutina-id">
+                <div class="form-group">
+                    <label for="rutina-nombre">Nombre de la Rutina</label>
+                    <input type="text" id="rutina-nombre" class="form-control" required placeholder="Ej: Push Day">
+                </div>
+                <div class="form-group">
+                    <label for="rutina-descripcion">Descripción / Enfoque</label>
+                    <textarea id="rutina-descripcion" class="form-control" rows="3" placeholder="Ej: Hombro, Pecho y Tríceps"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" id="btn-submit-rutina">Guardar Rutina</button>
+                <button type="button" class="btn btn-cancel" id="btn-cancel-rutina" onclick="resetFormRutina()">Cancelar Edición</button>
+            </form>
+        </div>
+        <div class="panel">
+            <h2>Bloques de Rutinas</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Rutina</th>
+                            <th>Descripción</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-rutinas-body">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <main id="section-historial" class="tab-content">
+        <div class="panel">
+            <h2 id="form-title-historial">Registrar Marca Histórica</h2>
+            <form id="form-historial">
+                <input type="hidden" id="historial-id">
+                <div class="form-group">
+                    <label for="select-atleta">Atleta</label>
+                    <select id="select-atleta" class="form-control" required>
+                        </select>
+                </div>
+                <div class="form-group">
+                    <label for="select-rutina">Rutina Realizada</label>
+                    <select id="select-rutina" class="form-control" required>
+                        </select>
+                </div>
+                <div class="form-group">
+                    <label for="historial-peso">Peso Máximo Levantado (kg)</label>
+                    <input type="number" id="historial-peso" class="form-control" required placeholder="Ej: 135">
+                </div>
+                <div class="form-group">
+                    <label for="historial-fecha">Fecha del Entrenamiento</label>
+                    <input type="date" id="historial-fecha" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" id="btn-submit-historial">Guardar Registro</button>
+                <button type="button" class="btn btn-cancel" id="btn-cancel-historial" onclick="resetFormHistorial()">Cancelar Edición</button>
+            </form>
+        </div>
+        <div class="panel">
+            <h2>Historial General de Progreso</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Atleta</th>
+                            <th>Rutina</th>
+                            <th>Peso Máximo</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-historial-body">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* FONDO CON IMAGEN + OVERLAY */
+body {
+    background: 
+        linear-gradient(rgba(11,29,38,0.7), rgba(11,29,38,0.9)),
+        url("../img/fondo.jpg") no-repeat center/cover;
+    
+    font-family: 'Inter', sans-serif;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* CONTENEDOR */
+.form-container {
+    background: rgba(31, 47, 58, 0.9);
+    padding: 40px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0px 10px 40px rgba(0,0,0,0.7);
+    backdrop-filter: blur(6px);
+}
+
+/* TITULO */
+h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+/* TEXTO */
+p {
+    text-align: center;
+    color: #c9d1d9;
+    margin-bottom: 25px;
+}
+
+/* LABELS */
+label {
+    font-size: 13px;
+    margin-bottom: 5px;
+    display: block;
+    color: #e6edf3;
+}
+
+/* INPUTS */
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 18px;
+    border-radius: 6px;
+    border: none;
+    background: #124F4A;
+    color: white;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+/* EFECTO FOCUS */
+input:focus {
+    outline: 2px solid #D72638;
+    box-shadow: 0 0 10px rgba(215,38,56,0.4);
+}
+
+/* BOTÓN ENVIAR */
+input[type="submit"] {
+    background: #D72638;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* BOTÓN RESET */
+input[type="reset"] {
+    background: transparent;
+    border: 1px solid #D72638;
+    color: #D72638;
+}
+
+/* HOVER */
+input[type="submit"]:hover {
+    background: #ff3b4d;
+    transform: scale(1.03);
+}
+
+input[type="reset"]:hover {
+    background: #D72638;
+    color: white;
+}
