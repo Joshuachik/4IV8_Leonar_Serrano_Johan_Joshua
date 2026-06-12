@@ -1,56 +1,49 @@
-// ============================================================
-// GYM TRACKER - CONTROLADOR FRONTEND INTERACTIVO (app.js)
-// Conexión total con los 4 endpoints de la API en Node.js
-// ============================================================
 
 const API_URL = 'http://localhost:3000/api';
 
-// Estado global para controlar qué ID estamos editando
 let editandoAtletaId = null;
 let editandoEjercicioId = null;
 let editandoRutinaId = null;
 let editandoHistorialId = null;
 
-// Inicializar la aplicación cuando cargue el navegador
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Cargar los datos de la pestaña inicial (Atletas)
+    
     cargarAtletas();
 
-    // Configurar los manejadores de los formularios
+   
     document.getElementById('form-atleta').addEventListener('submit', guardarAtleta);
     document.getElementById('form-ejercicio').addEventListener('submit', guardarEjercicio);
     document.getElementById('form-rutina').addEventListener('submit', guardarRutina);
     document.getElementById('form-historial').addEventListener('submit', guardarHistorial);
 });
 
-// ============================================================
-// CONTROL DE PESTAÑAS (TABS)
-// ============================================================
+
 function switchTab(tabName) {
-    // Quitar clase activa a todos los botones y contenidos
+    
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
 
-    // Activar la pestaña seleccionada
+   
     const btnActivo = Array.from(document.querySelectorAll('.tab-btn')).find(btn => btn.textContent.toLowerCase().includes(tabName.substring(0,4)));
     if (btnActivo) btnActivo.classList.add('active');
     
     const contenedorActivo = document.getElementById(`section-${tabName}`);
     if (contenedorActivo) contenedorActivo.classList.add('active');
 
-    // Cargar datos específicos al cambiar de sección
+   
     if (tabName === 'atletas') cargarAtletas();
     if (tabName === 'ejercicios') cargarEjercicios();
     if (tabName === 'rutinas') cargarRutinas();
     if (tabName === 'historial') {
         cargarHistorial();
-        actualizarSelectsHistorial(); // Rellenar los dropdowns dinámicos
+        actualizarSelectsHistorial(); 
     }
 }
 
-// ============================================================
-// SECCIÓN: ATLETAS (CRUD)
-// ============================================================
+
+// SECCIÓN: ATLETAS 
+
 async function cargarAtletas() {
     try {
         const res = await fetch(`${API_URL}/atletas`);
@@ -85,21 +78,21 @@ async function guardarAtleta(e) {
     const edad = document.getElementById('atleta-edad').value.trim();
     const email = document.getElementById('atleta-email').value.trim();
 
-    //  candado Validar Nombre (Mínimo 3 letras, sin números)
+    //  Validar Nombre (Mínimo 3 letras, sin números)
     const regexNombre = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
     if (nombre.length < 3 || !regexNombre.test(nombre)) {
         alert('Error: El nombre debe tener al menos 3 caracteres y contener solo letras y espacios.');
         return;
     }
 
-    // 🛑 CANDADO: Validar Edad (Rango lógico)
+    //  Validar Edad 
     const edadNum = parseInt(edad);
     if (isNaN(edadNum) || edadNum < 14 || edadNum > 90) {
         alert('Error: La edad debe ser un número entero válido entre 14 y 90 años.');
         return;
     }
 
-    // CANDADO: Validar Correo Electrónico
+    //  Validar Correo Electrónico
     const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!regexEmail.test(email)) {
         alert('Error: Por favor, introduce un correo electrónico válido (ejemplo@dominio.com).');
@@ -160,9 +153,7 @@ async function eliminarAtleta(id) {
     } catch (err) { alert('Error de conexión al eliminar'); }
 }
 
-// ============================================================
-// SECCIÓN: EJERCICIOS (CRUD)
-// ============================================================
+
 async function cargarEjercicios() {
     try {
         const res = await fetch(`${API_URL}/ejercicios`);
@@ -195,9 +186,9 @@ async function guardarEjercicio(e) {
     const nombre = document.getElementById('ejercicio-nombre').value.trim();
     const musculo_principal = document.getElementById('ejercicio-musculo').value.trim();
 
-    // CANDADO: Validar Nombre (Mínimo 2 letras, permite cosas como "Press 30°" pero NO puros números)
+    // Validar Nombre (Mínimo 2 letras, permite cosas como "Press 30°" pero NO puros números)
     const regexNombreEj = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü0-9°\s]+$/;
-    // Evita que pongan puros números sueltos (como "777") usando una validación extra
+    // Evita que pongan puros números sueltos 
     const contieneLetras = /[A-Za-zÑñÁáÉéÍíÓóÚúÜü]/.test(nombre);
 
     if (nombre.length < 2 || !regexNombreEj.test(nombre) || !contieneLetras) {
@@ -205,7 +196,7 @@ async function guardarEjercicio(e) {
         return;
     }
 
-    // CANDADO: Validar Músculo (Solo letras y espacios, mínimo 3 letras)
+    // Validar Músculo (Solo letras y espacios, mínimo 3 letras)
     const regexMusculo = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
     if (musculo_principal.length < 3 || !regexMusculo.test(musculo_principal)) {
         alert('Error: El músculo principal solo debe contener letras y espacios (mínimo 3 caracteres).');
@@ -256,9 +247,7 @@ async function eliminarEjercicio(id) {
     if (json.status === 'success') cargarEjercicios(); else alert(json.message);
 }
 
-// ============================================================
-// SECCIÓN: RUTINAS (CRUD)
-// ============================================================
+//RUTINAS 
 async function cargarRutinas() {
     try {
         const res = await fetch(`${API_URL}/rutinas`);
@@ -291,7 +280,7 @@ async function guardarRutina(e) {
     const nombre_rutina = document.getElementById('rutina-nombre').value.trim();
     const descripcion = document.getElementById('rutina-descripcion').value.trim();
 
-    // CANDADO: Validar Nombre de Rutina (Mínimo 3 caracteres, letras obligatorias)
+    // Validar Nombre de Rutina (Mínimo 3 caracteres, letras obligatorias)
     const regexRutina = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü0-9\s\-_]+$/;
     const contieneLetras = /[A-Za-zÑñÁáÉéÍíÓóÚúÜü]/.test(nombre_rutina);
 
@@ -300,7 +289,7 @@ async function guardarRutina(e) {
         return;
     }
 
-    // CANDADO: Validar Descripción (Opcional, pero si la ponen, mínimo 4 letras coherentes y máximo 255)
+    // Validar Descripción (Opcional, pero si la ponen, mínimo 4 letras coherentes y máximo 255)
     if (descripcion.length > 0) {
         if (descripcion.length < 4 || descripcion.length > 255) {
             alert('Error: La descripción debe ser una frase válida entre 4 y 255 caracteres.');
@@ -352,9 +341,9 @@ async function eliminarRutina(id) {
     if (json.status === 'success') cargarRutinas(); else alert(json.message);
 }
 
-// ============================================================
-// SECCIÓN: HISTORIAL DE PROGRESO (La tabla relacional)
-// ============================================================
+
+// SECCIÓN: HISTORIAL DE PROGRESO 
+
 async function cargarHistorial() {
     try {
         const res = await fetch(`${API_URL}/historial`);
@@ -383,7 +372,7 @@ async function cargarHistorial() {
     } catch (err) { console.error(err); }
 }
 
-// Rellena los Dropdowns de Atletas y Rutinas para evitar meter IDs incorrectos
+  
 async function actualizarSelectsHistorial() {
     try {
         const resAtletas = await fetch(`${API_URL}/atletas`);
@@ -408,7 +397,7 @@ async function actualizarSelectsHistorial() {
     } catch (err) { console.error(err); }
 }
 
-// 1. REEMPLAZA ESTA FUNCIÓN EN APP.JS
+
 async function guardarHistorial(e) {
     e.preventDefault();
     const atleta_id = document.getElementById('select-atleta').value;
@@ -421,7 +410,7 @@ async function guardarHistorial(e) {
         return;
     }
 
-    // CANDADO EN KG: Ajustado de 1 a 500 kg (un rango ultra pesado pero real)
+    
     const peso = parseInt(peso_maximo_lbs);
     if (isNaN(peso) || peso < 1 || peso > 500) {
         alert('Error: El peso máximo debe ser un número entero entre 1 y 500 kg.');

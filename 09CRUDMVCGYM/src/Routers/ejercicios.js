@@ -1,6 +1,3 @@
-// ============================================================
-// PROYECTO CRUD - GYM TRACKER: Rutas de Ejercicios
-// ============================================================
 
 const express = require('express');
 const router = express.Router();
@@ -38,9 +35,9 @@ function validarEjercicio(datos) {
     return errores;
 }
 
-// ============================================================
+
 // GET /api/ejercicios — Listar todos los ejercicios
-// ============================================================
+
 router.get('/', async (req, res) => {
     try {
         const [ejercicios] = await db.execute(
@@ -59,9 +56,9 @@ router.get('/', async (req, res) => {
     }
 });
 
-// ============================================================
+
 // GET /api/ejercicios/:id — Obtener uno solo
-// ============================================================
+
 router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
@@ -85,9 +82,9 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// ============================================================
+
 // POST /api/ejercicios — Crear nuevo ejercicio
-// ============================================================
+
 router.post('/', async (req, res) => {
     try {
         const errores = validarEjercicio(req.body);
@@ -115,9 +112,9 @@ router.post('/', async (req, res) => {
     }
 });
 
-// ============================================================
+
 // PUT /api/ejercicios/:id — Actualizar ejercicio
-// ============================================================
+
 router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params;
@@ -155,9 +152,9 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// ============================================================
+
 // DELETE /api/ejercicios/:id — Eliminar ejercicio
-// ============================================================
+
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
@@ -184,7 +181,7 @@ router.delete('/:id', async (req, res) => {
         });
 
     } catch (error) {
-        // Por si intentan borrar un ejercicio que ya está en el historial
+        
         if (error.code === 'ER_ROW_IS_REFERENCED_2' || error.errno === 1451) {
             return res.status(409).json({
                 status: 'error',

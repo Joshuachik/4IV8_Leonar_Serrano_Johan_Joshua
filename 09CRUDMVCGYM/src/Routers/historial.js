@@ -1,14 +1,13 @@
-// ============================================================
-// PROYECTO CRUD - GYM TRACKER: Rutas de Historial de Progreso
+
 
 
 const express = require('express');
 const router = express.Router();
 const db = require('../DB/database');
 
-// ============================================================
+
 // FUNCIÓN: Validar datos de historial
-// ============================================================
+
 
 function validarHistorial(datos) {
     const errores = [];
@@ -46,9 +45,9 @@ function validarHistorial(datos) {
 
     return errores;
 }
-// ============================================================
-// GET /api/historial — Listar todo el historial (Con INNER JOIN)
-// ============================================================
+
+// GET /api/historial — Listar todo el historial 
+
 router.get('/', async (req, res) => {
     try {
         const [historial] = await db.execute(`
@@ -71,9 +70,9 @@ router.get('/', async (req, res) => {
     }
 });
 
-// ============================================================
+
 // GET /api/historial/:id — Obtener un registro del historial
-// ============================================================
+
 router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
@@ -98,9 +97,9 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// ============================================================
+
 // POST /api/historial — Crear nuevo registro
-// ============================================================
+
 router.post('/', async (req, res) => {
     try {
         const errores = validarHistorial(req.body);
@@ -135,9 +134,9 @@ router.post('/', async (req, res) => {
     }
 });
 
-// ============================================================
+
 // PUT /api/historial/:id — Actualizar registro
-// ============================================================
+
 router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params;
@@ -182,9 +181,9 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// ============================================================
+
 // DELETE /api/historial/:id — Eliminar registro
-// ============================================================
+
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;

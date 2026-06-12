@@ -1,14 +1,11 @@
-// ============================================================
-// PROYECTO CRUD - GYM TRACKER: Rutas de Rutinas
+
 
 
 const express = require('express');
 const router = express.Router();
 const db = require('../DB/database');
 
-// ============================================================
 // FUNCIÓN: Validar datos de la rutina
-// ============================================================
 
 function validarRutina(datos) {
     const errores = [];
@@ -23,7 +20,7 @@ function validarRutina(datos) {
         }
     }
 
-    // 2. Validar la Descripción (Es opcional, pero si la ponen, que no exceda un límite sensato)
+    // 2. Validar la Descripción, tiene limite
     if (datos.descripcion !== undefined && datos.descripcion !== null && datos.descripcion !== '') {
         if (typeof datos.descripcion !== 'string' || datos.descripcion.trim().length > 255) {
             errores.push('La descripción no puede superar los 255 caracteres');
@@ -33,9 +30,9 @@ function validarRutina(datos) {
     return errores;
 }
 
-// ============================================================
+
 // GET /api/rutinas — Listar todas las rutinas
-// ============================================================
+
 router.get('/', async (req, res) => {
     try {
         const [rutinas] = await db.execute(
@@ -54,9 +51,9 @@ router.get('/', async (req, res) => {
     }
 });
 
-// ============================================================
+
 // GET /api/rutinas/:id — Obtener una sola
-// ============================================================
+
 router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
@@ -80,9 +77,9 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// ============================================================
+
 // POST /api/rutinas — Crear nueva rutina
-// ============================================================
+
 router.post('/', async (req, res) => {
     try {
         const errores = validarRutina(req.body);
@@ -111,9 +108,9 @@ router.post('/', async (req, res) => {
     }
 });
 
-// ============================================================
+
 // PUT /api/rutinas/:id — Actualizar rutina
-// ============================================================
+
 router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params;
@@ -152,9 +149,9 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// ============================================================
+
 // DELETE /api/rutinas/:id — Eliminar rutina
-// ============================================================
+
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;

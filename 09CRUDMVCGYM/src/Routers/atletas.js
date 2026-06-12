@@ -1,17 +1,14 @@
-// ============================================================
+
 // PROYECTO CRUD - GYM TRACKER: Rutas de Atletas (Usuarios)
-// ============================================================
-// CRUD completo para la tabla de atletas.
-// Estructura idéntica al router de usuarios del profesor.
-// ============================================================
+
 
 const express = require('express');
 const router = express.Router();
 const db = require('../DB/database');
 
-// ============================================================
+
 // FUNCIÓN: Validar datos del atleta
-// ============================================================
+
 function validarAtleta(datos) {
     const errores = [];
 
@@ -47,9 +44,9 @@ function validarAtleta(datos) {
 
     return errores;
 }
-// ============================================================
+
 // GET /api/atletas — Listar todos los atletas
-// ============================================================
+
 router.get('/', async (req, res) => {
     try {
         const [atletas] = await db.execute(
@@ -68,9 +65,9 @@ router.get('/', async (req, res) => {
     }
 });
 
-// ============================================================
+
 // GET /api/atletas/:id — Obtener uno solo
-// ============================================================
+
 router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
@@ -94,9 +91,9 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// ============================================================
+
 // POST /api/atletas — Crear nuevo atleta
-// ============================================================
+
 router.post('/', async (req, res) => {
     try {
         const errores = validarAtleta(req.body);
@@ -119,7 +116,7 @@ router.post('/', async (req, res) => {
         res.status(201).json({ status: 'success', data: nuevo[0] });
 
     } catch (error) {
-        // Controlar si el correo ya existe (llave UNIQUE en la base de datos)
+        
         if (error.code === 'ER_DUP_ENTRY') {
             return res.status(409).json({ status: 'error', message: 'El correo electrónico ya está registrado' });
         }
@@ -128,9 +125,9 @@ router.post('/', async (req, res) => {
     }
 });
 
-// ============================================================
+
 // PUT /api/atletas/:id — Actualizar atleta
-// ============================================================
+
 router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params;
@@ -171,9 +168,9 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// ============================================================
+
 // DELETE /api/atletas/:id — Eliminar atleta
-// ============================================================
+
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
@@ -200,7 +197,7 @@ router.delete('/:id', async (req, res) => {
         });
 
     } catch (error) {
-        // Restricción por Llave Foránea (si ya tiene historial)
+        
         if (error.code === 'ER_ROW_IS_REFERENCED_2' || error.errno === 1451) {
             return res.status(409).json({
                 status: 'error',

@@ -3,48 +3,389 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio de evidencias</title>
+    <title>Portafolio de Evidencias</title>
+    <style>
+        :root {
+            --bg-principal: #0f172a;
+            --bg-tarjeta: #1e293b;
+            --color-texto: #f8fafc;
+            --color-mutado: #94a3b8;
+            --color-acento: #38bdf8;
+            --color-acento-hover: #0ea5e9;
+            --borde: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-principal);
+            color: var(--color-texto);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .contenedor {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* --- CARÁTULA --- */
+        header {
+            background: linear-gradient(135deg, var(--bg-tarjeta) 0%, #111827 100%);
+            border: 1px solid var(--borde);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--color-acento);
+            margin-bottom: 10px;
+        }
+
+        header h2 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: var(--color-mutado);
+            margin-bottom: 25px;
+        }
+
+        .datos-estudiante {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            border-top: 1px solid var(--borde);
+            padding-top: 25px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .dato-item p {
+            font-size: 0.85rem;
+            color: var(--color-mutado);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .dato-item h3 {
+            font-size: 1.1rem;
+            color: var(--color-texto);
+            margin-top: 5px;
+        }
+
+        /* --- SECCIONES TEÓRICAS --- */
+        .info-seccion {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .tarjeta-info {
+            background-color: var(--bg-tarjeta);
+            border: 1px solid var(--borde);
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .tarjeta-info h2 {
+            font-size: 1.4rem;
+            color: var(--color-acento);
+            margin-bottom: 15px;
+        }
+
+        .tarjeta-info ul {
+            list-style-position: inside;
+            margin-top: 10px;
+        }
+
+        .tarjeta-info li {
+            margin-bottom: 8px;
+            color: var(--color-texto);
+            font-size: 0.95rem;
+        }
+
+        /* --- ENLACES EXTERNOS --- */
+        .enlaces-repositorio {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 45px;
+            flex-wrap: wrap;
+        }
+
+        .btn-enlace {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #24292e;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid #444;
+            transition: all 0.3s ease;
+        }
+
+        .btn-enlace.web-publica {
+            background-color: var(--color-acento);
+            color: var(--bg-principal);
+            border: none;
+        }
+
+        .btn-enlace:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
+        }
+
+        .btn-enlace.web-publica:hover {
+            background-color: var(--color-acento-hover);
+        }
+
+        /* --- MENÚ DE PRÁCTICAS --- */
+        .seccion-practicas h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--borde);
+            padding-bottom: 10px;
+        }
+
+        .grid-practicas {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .tarjeta-practica {
+            background-color: var(--bg-tarjeta);
+            border: 1px solid var(--borde);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .tarjeta-practica:hover {
+            border-color: var(--color-acento);
+            transform: scale(1.02);
+        }
+
+        .num-practica {
+            font-size: 0.8rem;
+            color: var(--color-acento);
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .tarjeta-practica h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .tarjeta-practica p {
+            font-size: 0.9rem;
+            color: var(--color-mutado);
+            margin-bottom: 20px;
+        }
+
+        .btn-practica {
+            display: block;
+            text-align: center;
+            background-color: transparent;
+            color: var(--color-acento);
+            border: 1px solid var(--color-acento);
+            padding: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .btn-practica:hover {
+            background-color: var(--color-acento);
+            color: var(--bg-principal);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--borde);
+            color: var(--color-mutado);
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Portafolio de evidencias</h1>
-    <p>Leonar Serrano Johan Joshua</p>
-
-    <h2>Prácticas</h2>
-
-    <ul>
-        <li>
-            <a href="./01PrimeraPractica/inicio.html">
-                01 - Primera práctica
-            </a>
-        </li>
-
-        <li>
-            <a href="./02Formulario/formulario.html">
-                02 - Formulario
-            </a>
-        </li>
-
+    <div class="contenedor">
         
-        
-         <li>
-            <a href="./03EjerciciosBasicos/01Ejercicio01.html">
-                03 - EjerciciosBasicos
-            </a>
-        </li>
-         <li>
-            <a href="./04Algoritmia/algoritmo.html">
-                04 - Algoritmia
-            </a>
-        </li>
+        <header>
+            <h1>Portafolio de Evidencias</h1>
+            <h2>Desarrollo de Aplicaciones Web</h2>
+            
+            <div class="datos-estudiante">
+                <div class="dato-item">
+                    <p>Estudiante</p>
+                    <h3>Leonar Serrano Johan Joshua</h3>
+                </div>
+                <div class="dato-item">
+                    <p>Grupo</p>
+                    <h3>4IV8</h3>
+                </div>
+                <div class="dato-item">
+                    <p>Institución</p>
+                    <h3>CECyT 9 "Juan de Dios Bátiz" (IPN)</h3>
+                </div>
+            </div>
+        </header>
 
-        <li>
-            <a href="./EjerciciosJS/ejercicios.html">
-                EjerciciosJS
+       <div class="enlaces-repositorio">
+            <a href="https://github.com/Joshuachik/4IV8_Leonar_Serrano_Johan_Joshua" target="_blank" class="btn-enlace">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16" style="display:inline; vertical-align:middle; margin-right:5px;">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+                Código en GitHub
             </a>
-        </li>
+            
+            <a href="https://joshuachik.github.io/4IV8_Leonar_Serrano_Johan_Joshua/" target="_blank" class="btn-enlace web-publica">
+                Página Pública (GitHub Pages)
+            </a>
+        </div>
 
-    </ul>
+        <div class="info-seccion">
+            <div class="tarjeta-info">
+                <h2>Objetivo del Portafolio</h2>
+                <p>Presentar de manera formal y estructurada el conjunto de soluciones de software y prácticas web construidas durante el curso. Este espacio evidencia el proceso de aprendizaje continuo, la aplicación de reglas de diseño unificadas y el manejo progresivo de lógica computacional en el frontend y arquitecturas backend.</p>
+            </div>
+            
+            <div class="tarjeta-info">
+                <h2>Elementos Aprendidos</h2>
+                <ul>
+                    <li>Maquetación web estructurada bajo estándares semánticos de HTML5.</li>
+                    <li>Aplicación de guías de estilo CSS personalizadas para interfaces responsivas y adaptables.</li>
+                    <li>Estructuración de lógica interactiva y control del DOM con JavaScript nativo.</li>
+                    <li>Diseño de sistemas dinámicos fundamentados en operaciones CRUD y persistencia lógica.</li>
+                    <li>Implementación avanzada del patrón de arquitectura de software <strong>Modelo-Vista-Controlador (MVC)</strong> en Node.js.</li>
+                </ul>
+            </div>
+        </div>
+
+        <section class="seccion-practicas">
+            <h2>Prácticas Realizadas</h2>
+            
+            <div class="grid-practicas">
+                
+                <div class="tarjeta-practica">
+                    <div>
+                        <div class="num-practica">01</div>
+                        <h3>Primera Práctica</h3>
+                        <p>Estructuras base del documento HTML, semántica inicial y primeros contenedores.</p>
+                    </div>
+                    <a href="./01PrimeraPractica/inicio.html" class="btn-practica">Ir a la práctica</a>
+                </div>
+
+                <div class="tarjeta-practica">
+                    <div>
+                        <div class="num-practica">02</div>
+                        <h3>Formulario</h3>
+                        <p>Diseño de campos, organización de entradas de usuario y elementos interactivos.</p>
+                    </div>
+                    <a href="./02Formulario/formulario.html" class="btn-practica">Ir a la práctica</a>
+                </div>
+
+                <div class="tarjeta-practica">
+                    <div>
+                        <div class="num-practica">03</div>
+                        <h3>Ejercicios Básicos</h3>
+                        <p>Planteamiento de algoritmos y solución de flujos de control introductorios.</p>
+                    </div>
+                    <a href="./03EjerciciosBasicos/01Ejercicio01.html" class="btn-practica">Ir a la práctica</a>
+                </div>
+
+                <div class="tarjeta-practica">
+                    <div>
+                        <div class="num-practica">04</div>
+                        <h3>Algoritmia</h3>
+                        <p>Resolución de problemas lógicos y matemáticos aplicados a la manipulación en navegador.</p>
+                    </div>
+                    <a href="./04Algoritmia/algoritmo.html" class="btn-practica">Ir a la práctica</a>
+                </div>
+
+                <div class="tarjeta-practica">
+                    <div>
+                        <div class="num-practica">Extra</div>
+                        <h3>Ejercicios JS</h3>
+                        <p>Módulo intensivo de ejercicios lógicos nativos programados con scripts de JavaScript.</p>
+                    </div>
+                    <a href="./EjerciciosJS/ejercicios.html" class="btn-practica">Ir a la práctica</a>
+                </div>
+
+                <div class="tarjeta-practica">
+                    <div>
+                        <div class="num-practica">05</div>
+                        <h3>Funciones</h3>
+                        <p>Reutilización de bloques de código y modularización lógica mediante el uso de funciones.</p>
+                    </div>
+                    <a href="./05Funciones/funciones.js" class="btn-practica">Ver código fuente</a>
+                </div>
+
+                <div class="tarjeta-practica">
+                    <div>
+                        <div class="num-practica">06</div>
+                        <h3>Rompecabezas</h3>
+                        <p>Aplicación interactiva construida mediante manipulación dinámica de nodos gráficos en el DOM.</p>
+                    </div>
+                    <a href="./06Rompecabezas/rompecabezas.html" class="btn-practica">Ir a la práctica</a>
+                </div>
+
+                <div class="tarjeta-practica">
+                    <div>
+                        <div class="num-practica">07</div>
+                        <h3>CRUD</h3>
+                        <p>Implementación local de un sistema para Crear, Leer, Actualizar y Eliminar registros.</p>
+                    </div>
+                    <a href="./07CRUD/public/index.html" class="btn-practica">Ir a la práctica</a>
+                </div>
+
+                <div class="tarjeta-practica">
+                    <div>
+                        <div class="num-practica">08</div>
+                        <h3>CRUD MVC</h3>
+                        <p>Sistema estructurado bajo separación de responsabilidades con patrón de diseño de software.</p>
+                    </div>
+                    <a href="./08CRUDMVC/public/index.html" class="btn-practica">Ir a la práctica</a>
+                </div>
+
+                <div class="tarjeta-practica">
+                    <div>
+                        <div class="num-practica">09</div>
+                        <h3>CRUD MVC GYM</h3>
+                        <p>Plataforma de gestión deportiva avanzada con flujos lógicos complejos y arquitectura de datos limpia.</p>
+                    </div>
+                    <a href="./09CRUDMVCGYM/public/index.html" class="btn-practica">Ir a la práctica</a>
+                </div>
+
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 - Leonar Serrano Johan Joshua. Entregable Académico.</p>
+        </footer>
+
+    </div>
 
 </body>
 </html>

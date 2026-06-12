@@ -1,6 +1,4 @@
-/* 
-GYM TRACKER - HOJA DE ESTILOS GENERALES (estilos.css)
-   */
+
 
 :root {
     --bg-color: #121212;
@@ -44,7 +42,7 @@ header p {
     margin-top: 5px;
 }
 
-/* Sistema de Pestañas */
+
 .tabs-nav {
     display: flex;
     justify-content: center;

@@ -3,14 +3,13 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
-// Servidor para inicializar con Express
+
 
 const PORT = process.env.PORT || 3000;
 
-// Middleware CORS para permitir peticiones externas
 app.use(cors());
 
-// Las peticiones las debemos atender en un formato JSON (clave-valor)
+
 app.use(express.json());
 
 
@@ -19,7 +18,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// Definimos la ruta estática para los archivos de la vista (HTML, CSS, JS del front)
+
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // IMPORTACIÓN DE LOS 4 ROUTERS PARA EL GYM
